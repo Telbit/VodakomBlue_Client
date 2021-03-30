@@ -1,13 +1,17 @@
 import React from 'react';
-import { Route, Switch } from 'react-router';
-import {Button} from '@material-ui/core';
+import { Router, Route, Switch } from 'react-router-dom';
+import {Button, Typography} from '@material-ui/core';
+import Navbar from './components/Navbar/Navbar';
 
 export const App = () => {
     return (
-        <Switch>
-            <Route path={'/'}>
-                Hello World!
-            </Route>
-        </Switch>
+        <div>
+            <Navbar/>
+            <Switch>
+                <Route exact path='/'>
+                    <Typography>HelloWorld!</Typography>
+                </Route>
+            </Switch>
+        </div>
     );
 }
