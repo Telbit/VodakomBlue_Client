@@ -5,14 +5,12 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
-import { motion } from 'framer-motion';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         width: "100%",
-        maxWidth: 360,
         backgroundColor: "inherited",
-        color: "white"
+        color: "white",
     },
     nested: {
         paddingLeft: theme.spacing(4)

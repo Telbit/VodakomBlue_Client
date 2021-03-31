@@ -1,6 +1,7 @@
 import { Grid } from '@material-ui/core'
 import React from 'react'
 import { makeStyles } from '@material-ui/core';
+import { HomeInternetForm } from '../HomeInternetForm';
 
 const useStyles = makeStyles({
     container: {
@@ -9,12 +10,14 @@ const useStyles = makeStyles({
         boxSizing: "border-box"
     },
     selectMenu: {
-        backgroundColor: "#3f51b5"
+        backgroundColor: "#3f51b5",
+        borderRadius: 3
     }
 });
 
 export const EditLayout = (props) => {
     const classes = useStyles();
+
     return (
         <div>
             <Grid container className={classes.container}>
@@ -22,7 +25,7 @@ export const EditLayout = (props) => {
                     {props.navarea}
                 </Grid>
                 <Grid item xs={10}>
-                    {props.workarea}
+                    <HomeInternetForm />
                 </Grid>
             </Grid>
         </div>
