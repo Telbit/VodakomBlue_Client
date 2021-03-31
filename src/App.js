@@ -2,7 +2,7 @@ import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import { Button, Grid, Typography } from '@material-ui/core';
 import Navbar from './components/Navbar/Navbar';
-import { CreatePackageLayout } from './components/Layout/CreatePackageLayout';
+import { EditLayout } from './components/Layout/EditLayout';
 
 export const App = () => {
     return (
@@ -12,7 +12,9 @@ export const App = () => {
                 <Route exact path='/'>
                     <Typography>HelloWorld!</Typography>
                 </Route>
-                <Route path="/create" component={CreatePackageLayout} />
+                <Route path="/create">
+                    <EditLayout />
+                </Route>
             </Switch>
         </div>
     );
