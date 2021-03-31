@@ -1,7 +1,6 @@
 import { Grid } from '@material-ui/core'
 import React from 'react'
 import { makeStyles } from '@material-ui/core';
-import { NavMenu } from './NavMenu';
 
 const useStyles = makeStyles({
     container: {
@@ -20,9 +19,11 @@ export const EditLayout = (props) => {
         <div>
             <Grid container className={classes.container}>
                 <Grid item xs={2} className={classes.selectMenu}>
-                    <NavMenu />
+                    {props.navarea}
                 </Grid>
-                <Grid item xs={10}></Grid>
+                <Grid item xs={10}>
+                    {props.workarea}
+                </Grid>
             </Grid>
         </div>
     )

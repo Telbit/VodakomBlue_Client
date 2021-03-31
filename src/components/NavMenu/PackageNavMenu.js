@@ -5,6 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
+import { motion } from 'framer-motion';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export const NavMenu = () => {
+export const PackageNavMenu = () => {
     const classes = useStyles();
     const [HomeOpen, setHomeOpen] = useState(true);
     const [MobileOpen, setMobileOpen] = useState(true);
