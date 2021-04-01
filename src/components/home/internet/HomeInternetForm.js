@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button, FormControl, Grid, InputLabel, makeStyles, MenuItem, Select, TextField } from '@material-ui/core';
 import axios from 'axios';
-import { useHistory } from 'react-router';
+import { FormContext } from '../../../FormContext';
+import { useSnackbar } from 'notistack';
 
 const useStyles = makeStyles({
     root: {
@@ -23,7 +24,7 @@ const useStyles = makeStyles({
     }
 });
 
-export const HomeInternetForm = () => {
+export const HomeInternetForm = (props) => {
     const classes = useStyles();
     const [Name, setName] = useState("");
     const [Price, setPrice] = useState(0);
@@ -31,7 +32,8 @@ export const HomeInternetForm = () => {
     const [DownloadSpeed, setDownloadSpeed] = useState(0);
     const [UploadSpeed, setUploadSpeed] = useState(0);
     const [Technology, setTechnology] = useState("");
-    const history = useHistory();
+    const [, setFormName] = useContext(FormContext);
+    const { enqueueSnackbar } = useSnackbar();
 
     const SendForm = (e) => {
         e.preventDefault();
@@ -46,7 +48,10 @@ export const HomeInternetForm = () => {
         axios.post("/api/homeinternet", internetPackage)
             .then(res => {
                 if (res.status === 200) {
-                    history.push("/packages");
+                    enqueueSnackbar("Success", {
+                        variant: 'success',
+                    });
+                    setFormName("");
                 }
             })
     };
