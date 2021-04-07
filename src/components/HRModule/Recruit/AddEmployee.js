@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+import Grid from '@material-ui/core/Grid';
 
 
 
@@ -30,10 +31,18 @@ function AddEmployee() {
     const classes = useStyles();
     return (
         <form >
+            <Grid container spacing={3}>
             <div>
+            <Grid item xs>
                 <TextField required id="firstname" label="First Name" variant="outlined" />
+            </Grid>
+            <Grid item xs>
                 <TextField required id="lastname" label="Last Name" variant="outlined" />
+            </Grid>
+            <Grid item xs>
                 <TextField required id="mothers-name" label="Mothers Name" variant="outlined" />
+            </Grid>
+            <Grid item xs>
                 <TextField required id="birthdate"
                     label="Birthday"
                     type="date"
@@ -42,18 +51,22 @@ function AddEmployee() {
                     InputLabelProps={{
                     shrink: true,
                 }} variant="outlined"/>
-                <TextField required id="email" label="Email address" variant="outlined" />
-
+            </Grid>
+            <Grid item xs>
+                <TextField required id="email" label="Email address" variant="outlined" /> 
+            </Grid>
+            <Grid item xs>
                 <TextField required id="id-card"  label="ID Card Number" variant="outlined" />
-
+            </Grid>
+            <Grid item xs>
                 <TextField required id="phone-number"  label="Phone number" variant="outlined" />
-
+            </Grid>
+            <Grid item xs>
                 <TextField
                     id="select-position"
                     select
                     label="Select"
                     value={currentPosition}
-                    className={classes.selectField}
                     onChange={handleCurrentPositionChange}
                     helperText="Please select a position"
                     >
@@ -63,12 +76,14 @@ function AddEmployee() {
                         </MenuItem>
                     ))}
                 </TextField>
+            </Grid>
+                
+
 
 
                 
-
-                
-            </div>
+                </div>
+            </Grid>
         </form>
     )
 }
