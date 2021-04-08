@@ -31,7 +31,7 @@ function UserTemplate(props) {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-        <form >
+        
             <Grid container   alignItems="center">
                 <Grid item xs={6} className={classes.gridItems}>
                     <TextField required id="firstname" label="First Name" variant="outlined" className={classes.textFields} />
@@ -79,7 +79,7 @@ function UserTemplate(props) {
                     </TextField>}
                 </Grid>
             </Grid>            
-        </form>
+        
         </div>  
     )
 }
