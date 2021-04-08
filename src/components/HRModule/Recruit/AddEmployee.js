@@ -24,21 +24,21 @@ function AddEmployee(props) {
     }, [currentStepCount])
 
     const handleNextButtonClick = () => {
-        setCurrentStepCount(currentStepCount + 1);
-        /* if (nextButton.childNodes[0].outerText !== "FINISH"){
-        }else{
+        if (currentStepCount == stepComponents.length-1){
             console.log("the end")
-        } */
+        }else{
+            setCurrentStepCount(currentStepCount + 1);
+        }
+        
     }
 
     const handleBackButtonClick = () => {
         setCurrentStepCount(currentStepCount - 1);
     }
 
-    useEffect(() => {
+    /* useEffect(() => {
         const nextButton = document.getElementById('next-button');
         const backButton = document.getElementById('back-button');
-        console.log(nextButton.childNodes[0].outerText)
 
         backButton.addEventListener('click', handleBackButtonClick);
         nextButton.addEventListener('click', handleNextButtonClick);
@@ -46,7 +46,7 @@ function AddEmployee(props) {
             backButton.removeEventListener('click', handleBackButtonClick);
             nextButton.removeEventListener('click', handleNextButtonClick);
         }
-    }, [handleBackButtonClick, handleNextButtonClick])
+    }, []) */
 
 
     
@@ -61,7 +61,8 @@ function AddEmployee(props) {
             </Grid>
             
             <Grid item xs={6}>
-                <Stepper getSteps={addEmployeeSteps} getStepContent={getAddEmployeeStepContent}/>
+                <Stepper getSteps={addEmployeeSteps} getStepContent={getAddEmployeeStepContent} 
+                backButton={handleBackButtonClick} nextButton={handleNextButtonClick}/>
             </Grid>
         </Grid>
         </form>
