@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-  },
+  }/* ,
   button: {
     marginTop: theme.spacing(1),
     marginRight: theme.spacing(1),
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   resetContainer: {
     padding: theme.spacing(3),
-  },
+  }, */
 }));
 
 //You have to pass getSteps, getStepContent props to use this stepper !
@@ -35,14 +35,17 @@ export default function VerticalLinearStepper(props) {
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    props.nextButton();
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    props.backButton();
   };
 
   const handleReset = () => {
     setActiveStep(0);
+    
   };
 
   return (
