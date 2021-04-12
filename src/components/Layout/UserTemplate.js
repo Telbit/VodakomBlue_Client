@@ -5,8 +5,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Grid from '@material-ui/core/Grid';
 
 
-
-
 function UserTemplate(props) {
     const newDate = new Date().toISOString();
     const positions = [
@@ -26,21 +24,24 @@ function UserTemplate(props) {
     const[currentPosition, setPosition] = useState();
     const handleCurrentPositionChange = (event) => {
         setPosition(event.target.value);
+        props.onChangeMethods.position(event);
     }
     
     const classes = useStyles();
     return (
         <div className={classes.root}>
-        
             <Grid container   alignItems="center">
                 <Grid item xs={6} className={classes.gridItems}>
-                    <TextField required id="firstname" label="First Name" variant="outlined" className={classes.textFields} />
+                    <TextField required id="firstname" label="First Name" variant="outlined" className={classes.textFields} 
+                    onChange={props.onChangeMethods.firstName}/>
                 </Grid>
                 <Grid item xs={6} className={classes.gridItems}>
-                    <TextField required id="lastname" label="Last Name" variant="outlined" className={classes.textFields} />
+                    <TextField required id="lastname" label="Last Name" variant="outlined" className={classes.textFields}
+                    onChange={props.onChangeMethods.lastName} />
                 </Grid>
                 <Grid item xs={6} className={classes.gridItems}>
-                    <TextField required id="mothers-name" label="Mothers Name" variant="outlined" className={classes.textFields} />
+                    <TextField required id="mothers-name" label="Mothers Name" variant="outlined" className={classes.textFields}
+                     onChange={props.onChangeMethods.mothersName} />
                 </Grid>
                 <Grid item xs={6} className={classes.gridItems}>
                     <TextField required id="birthdate"
@@ -50,16 +51,21 @@ function UserTemplate(props) {
                         className={classes.textFields}
                         InputLabelProps={{
                         shrink: true,
-                    }} variant="outlined"/>
+                    }} variant="outlined"
+                        onChange={props.onChangeMethods.birthday}
+                    />
                 </Grid>
                 <Grid item xs={6} className={classes.gridItems}>
-                    <TextField required id="email" label="Email address" variant="outlined" className={classes.textFields} /> 
+                    <TextField required id="email" label="Email address" variant="outlined" className={classes.textFields} 
+                    onChange={props.onChangeMethods.email}/> 
                 </Grid>
                 <Grid item xs={6} className={classes.gridItems}>
-                    <TextField required id="id-card"  label="ID Card Number" variant="outlined" className={classes.textFields} />
+                    <TextField required id="id-card"  label="ID Card Number" variant="outlined" className={classes.textFields} 
+                    onChange={props.onChangeMethods.idCard}/>
                 </Grid>
                 <Grid item xs={6} className={classes.gridItems}>
-                    <TextField required id="phone-number"  label="Phone number" variant="outlined" className={classes.textFields} />
+                    <TextField required id="phone-number"  label="Phone number" variant="outlined" className={classes.textFields} 
+                    onChange={props.onChangeMethods.phone}/>
                 </Grid>
                 <Grid item xs={6} className={classes.gridItems}>
                     {props.employee && <TextField
@@ -102,6 +108,7 @@ const useStyles = makeStyles((theme) => ({
     },
     gridItems: {
         padding: '2vw',
+        
         
     },
     textFields: {
