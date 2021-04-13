@@ -91,6 +91,7 @@ function AddEmployee(props) {
     const handleNextButtonClick = () => {
         if (currentStepCount == stepComponents.length-1){
             console.log("the end")
+            console.log(address, zipCode, phoneNum,city,email)
         }else{
             setCurrentStepCount(currentStepCount + 1);
         }
@@ -116,7 +117,8 @@ function AddEmployee(props) {
     
     
     
-    const stepComponents = [<UserTempalte employee={true}/>, <AddressTemplate/>]
+    const stepComponents = [<UserTempalte employee={true} onChangeMethods={employeeFormOnChanges}/>,
+                             <AddressTemplate onChangeMethods={addressFormOnChanges}/>]
     
     return (
         <div >
