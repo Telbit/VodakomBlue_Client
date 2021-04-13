@@ -17,7 +17,14 @@ function AddEmployee(props) {
 
     const[currentStepComponent, setCurrentStepComponent] = useState();
     const[currentStepCount, setCurrentStepCount] = useState(0);
-    console.log(currentStepCount);
+    //Employee form states
+    const[firstName, setFirstName] = useState();
+    const[lastName, setLastName] = useState();
+    const[mothersName, setMothersName] = useState();
+    const[email, setEmail] = useState();
+    const[phoneNum, setPhoneNum] = useState();
+    const[birthDate, setBirthDate] = useState();
+    const[idCardNum, setIdCardNum] = useState();
 
     useEffect(() => {
         setCurrentStepComponent(stepComponents[currentStepCount])
