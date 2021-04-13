@@ -54,6 +54,15 @@ function AddEmployee(props) {
         setIdCardNum(event.target.value);
     }
         //Adddress form onChange handler methods
+    const handleAddressChange = (event) => {
+        setAddress(event.target.value);
+    }
+    const handleZipCodeChange = (event) => {
+        setZipCode(event.target.value);
+    }
+    const handleCityChange = (event) => {
+        setCity(event.target.value);
+    }
     useEffect(() => {
         setCurrentStepComponent(stepComponents[currentStepCount])
     }, [currentStepCount])
