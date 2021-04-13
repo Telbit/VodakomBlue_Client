@@ -30,6 +30,30 @@ function AddEmployee(props) {
     const[city, setCity] = useState();
     const[zipCode, setZipCode] = useState();
 
+    //Form onChange handlers
+        //Employee form onChange handler methods
+    const handleFirstNameChange = (event) => {
+        setFirstName(event.target.value);
+    }
+    const handleLastNameChange = (event) => {
+        setLastName(event.target.value);
+    }
+    const handleMothersNameChange = (event) => {
+        setMothersName(event.target.value);
+    }
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value);
+    }
+    const handlePhoneNumChange = (event) => {
+        setPhoneNum(event.target.value);
+    }
+    const handleBirthDateChange = (event) => {
+        setBirthDate(event.target.value);
+    }
+    const handleIdCardNumChange = (event) => {
+        setIdCardNum(event.target.value);
+    }
+        //Adddress form onChange handler methods
     useEffect(() => {
         setCurrentStepComponent(stepComponents[currentStepCount])
     }, [currentStepCount])
