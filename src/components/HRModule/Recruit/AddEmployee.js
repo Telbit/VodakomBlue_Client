@@ -84,6 +84,29 @@ function AddEmployee(props) {
         address:handleAddressChange
     }
 
+    const createEmployeeObj = () => {
+        return {
+            FirstName: firstName,
+            LastName: lastName,
+            Email: email,
+            IdCardNumber: idCardNum,
+            MothersName: mothersName,
+            BirthDate: birthDate,
+            ContactPhoneNumber: phoneNum
+        }
+    }
+
+    const createAddressObj = () => {
+        return {
+            ZipCode: zipCode,
+            City: city,
+            StreetAddress: address,
+            IsBillingAddress: true,
+            IsHomeAddress: true,
+            CustomerId: null
+        }
+    }
+
     useEffect(() => {
         setCurrentStepComponent(stepComponents[currentStepCount])
     }, [currentStepCount])
