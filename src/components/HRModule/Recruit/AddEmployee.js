@@ -13,8 +13,7 @@ import { event } from 'jquery';
 
 function AddEmployee(props) {
 
-    const stepComponents = [<UserTempalte employee={true}/>, <AddressTemplate/>]
-
+    
     const[currentStepComponent, setCurrentStepComponent] = useState();
     const[currentStepCount, setCurrentStepCount] = useState(0);
     //Employee form states
@@ -25,13 +24,14 @@ function AddEmployee(props) {
     const[phoneNum, setPhoneNum] = useState();
     const[birthDate, setBirthDate] = useState();
     const[idCardNum, setIdCardNum] = useState();
+    const[position, setPositon] = useState();
     //Address form states
     const[address, setAddress] = useState();
     const[city, setCity] = useState();
     const[zipCode, setZipCode] = useState();
-
+    
     //Form onChange handlers
-        //Employee form onChange handler methods
+    //Employee form onChange handler methods
     const handleFirstNameChange = (event) => {
         setFirstName(event.target.value);
     }
@@ -53,7 +53,10 @@ function AddEmployee(props) {
     const handleIdCardNumChange = (event) => {
         setIdCardNum(event.target.value);
     }
-        //Adddress form onChange handler methods
+    const handlePositionChange = (event) => {
+        setPositon(event.target.value);
+    }
+    //Adddress form onChange handler methods
     const handleAddressChange = (event) => {
         setAddress(event.target.value);
     }
@@ -63,10 +66,22 @@ function AddEmployee(props) {
     const handleCityChange = (event) => {
         setCity(event.target.value);
     }
+
+    const employeeFormOnChanges = {
+        firstName:handleFirstNameChange,
+        lastName:handleLastNameChange,
+        mothersName:handleMothersNameChange,
+        birthday:handleBirthDateChange,
+        email:handleEmailChange,
+        idCard:handleIdCardNumChange,
+        phone:handlePhoneNumChange,
+        position:handlePositionChange
+    }
+    
     useEffect(() => {
         setCurrentStepComponent(stepComponents[currentStepCount])
     }, [currentStepCount])
-
+    
     const handleNextButtonClick = () => {
         if (currentStepCount == stepComponents.length-1){
             console.log("the end")
@@ -75,15 +90,15 @@ function AddEmployee(props) {
         }
         
     }
-
+    
     const handleBackButtonClick = () => {
         setCurrentStepCount(currentStepCount - 1);
     }
-
+    
     /* useEffect(() => {
         const nextButton = document.getElementById('next-button');
         const backButton = document.getElementById('back-button');
-
+        
         backButton.addEventListener('click', handleBackButtonClick);
         nextButton.addEventListener('click', handleNextButtonClick);
         return () => {
@@ -91,11 +106,12 @@ function AddEmployee(props) {
             nextButton.removeEventListener('click', handleNextButtonClick);
         }
     }, []) */
-
-
     
     
-
+    
+    
+    const stepComponents = [<UserTempalte employee={true}/>, <AddressTemplate/>]
+    
     return (
         <div >
         <form >
