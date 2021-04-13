@@ -77,7 +77,13 @@ function AddEmployee(props) {
         phone:handlePhoneNumChange,
         position:handlePositionChange
     }
-    
+
+    const addressFormOnChanges = {
+        zipCode:handleZipCodeChange,
+        city:handleCityChange,
+        address:handleAddressChange
+    }
+
     useEffect(() => {
         setCurrentStepComponent(stepComponents[currentStepCount])
     }, [currentStepCount])
