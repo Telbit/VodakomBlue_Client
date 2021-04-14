@@ -43,7 +43,7 @@ function UserTemplate(props) {
         props.onChangeMethods.phone(event.target.value);
     }
     const handleBirthDateChange = (event) => {
-        props.onChangeMethods.birthday(event.target.value);
+        props.onChangeMethods.birthday(new Date(event.target.value));
     }
     const handleIdCardNumChange = (event) => {
         props.onChangeMethods.idCard(event.target.value);
@@ -90,7 +90,7 @@ function UserTemplate(props) {
                 </Grid>
                 <Grid item xs={6} className={classes.gridItems}>
                     <TextField required id="phone-number"  label="Phone number" variant="outlined" className={classes.textFields} 
-                    onChange={props.onChangeMethods.phone}/>
+                    onChange={handlePhoneNumChange}/>
                 </Grid>
                 <Grid item xs={6} className={classes.gridItems}>
                     {props.employee && <TextField
