@@ -12,13 +12,13 @@ function AddressTemplate(props) {
     const classes = useStyles();
 
     const handleAddressChange = (event) => {
-        props.onChangeMethods.zipCode(event.target.value);
+        props.onChangeMethods.address(event.target.value);
     }
     const handleZipCodeChange = (event) => {
-        props.onChangeMethods.city(event.target.value);
+        props.onChangeMethods.zipCode(parseInt(event.target.value));
     }
     const handleCityChange = (event) => {
-        props.onChangeMethods.address(event.target.value)
+        props.onChangeMethods.city(event.target.value)
     }
 
     return (
