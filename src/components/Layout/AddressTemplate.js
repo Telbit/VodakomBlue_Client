@@ -10,20 +10,31 @@ function AddressTemplate(props) {
 
 
     const classes = useStyles();
+
+    const handleAddressChange = (event) => {
+        props.onChangeMethods.zipCode(event.target.value);
+    }
+    const handleZipCodeChange = (event) => {
+        props.onChangeMethods.city(event.target.value);
+    }
+    const handleCityChange = (event) => {
+        props.onChangeMethods.address(event.target.value)
+    }
+
     return (
         <div className={classes.root}>
                 <Grid container alignItems="center">
                     <Grid item xs={6} className={classes.gridItems}>
-                        <TextField required type="number" id="zip-code" label="Zip code" variant="outlined" className={classes.textFields} 
-                        onChange={props.onChangeMethods.zipCode}/>
+                        <TextField  required type="number" id="zip-code" label="Zip code" variant="outlined" className={classes.textFields} 
+                        onChange={handleZipCodeChange}/>
                     </Grid>
                     <Grid item xs={6} className={classes.gridItems}>
                         <TextField required  id="city" label="City" variant="outlined" className={classes.textFields} 
-                        onChange={props.onChangeMethods.city}/>
+                        onChange={handleCityChange}/>
                     </Grid>
                     <Grid item xs={6} className={classes.gridItems}>
                         <TextField required  id="address" label="Address" variant="outlined" className={classes.textFields} 
-                        onChange={props.onChangeMethods.address}/>
+                        onChange={handleAddressChange}/>
                     </Grid>
                     <Grid item xs={6} className={classes.gridItems}>
                         <TextField required  id="state" label="State" variant="outlined" className={classes.textFields} />
