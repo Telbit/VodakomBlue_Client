@@ -7,13 +7,16 @@ import Grid from '@material-ui/core/Grid';
 import Stepper from '../../Utility/Stepper';
 import AddressTemplate from '../../Layout/AddressTemplate';
 import { event } from 'jquery';
+import axios from 'axios';
+import { useSnackbar } from 'notistack';
 
 
 
 
 function AddEmployee(props) {
-
     
+    
+    const  enqueueSnackbar  = useSnackbar();
     const[currentStepComponent, setCurrentStepComponent] = useState();
     const[currentStepCount, setCurrentStepCount] = useState(0);
     //Employee form states
@@ -30,84 +33,24 @@ function AddEmployee(props) {
     const[city, setCity] = useState();
     const[zipCode, setZipCode] = useState();
 
-    const[employeeObj, setEmployeeObj] = useState({});
-    const[addressObj, setAddressObj] = useState({});
     
     //Form onChange handlers
-    //Employee form onChange handler methods
-    const handleFirstNameChange = (event) => {
-        setFirstName(event.target.value);
-    }
-    const handleLastNameChange = (event) => {
-        setLastName(event.target.value);
-    }
-    const handleMothersNameChange = (event) => {
-        setMothersName(event.target.value);
-    }
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
-    }
-    const handlePhoneNumChange = (event) => {
-        setPhoneNum(event.target.value);
-    }
-    const handleBirthDateChange = (event) => {
-        setBirthDate(event.target.value);
-    }
-    const handleIdCardNumChange = (event) => {
-        setIdCardNum(event.target.value);
-    }
-    const handlePositionChange = (event) => {
-        setPositon(event.target.value);
-    }
-    //Adddress form onChange handler methods
-    const handleAddressChange = (event) => {
-        setAddress(event.target.value);
-    }
-    const handleZipCodeChange = (event) => {
-        setZipCode(event.target.value);
-    }
-    const handleCityChange = (event) => {
-        setCity(event.target.value);
-    }
 
     const employeeFormOnChanges = {
-        firstName:handleFirstNameChange,
-        lastName:handleLastNameChange,
-        mothersName:handleMothersNameChange,
-        birthday:handleBirthDateChange,
-        email:handleEmailChange,
-        idCard:handleIdCardNumChange,
-        phone:handlePhoneNumChange,
-        position:handlePositionChange
+        firstName: setFirstName,
+        lastName: setLastName,
+        mothersName: setMothersName,
+        birthday: setBirthDate,
+        email: setEmail,
+        idCard: setIdCardNum,
+        phone: setPhoneNum,
+        position: setPositon
     }
 
     const addressFormOnChanges = {
-        zipCode:handleZipCodeChange,
-        city:handleCityChange,
-        address:handleAddressChange
-    }
-
-    const createEmployeeObj = () => {
-        return {
-            FirstName: firstName,
-            LastName: lastName,
-            Email: email,
-            IdCardNumber: idCardNum,
-            MothersName: mothersName,
-            BirthDate: birthDate,
-            ContactPhoneNumber: phoneNum
-        }
-    }
-
-    const createAddressObj = () => {
-        return {
-            ZipCode: zipCode,
-            City: city,
-            StreetAddress: address,
-            IsBillingAddress: true,
-            IsHomeAddress: true,
-            CustomerId: null
-        }
+        zipCode: setZipCode,
+        city: setCity,
+        address: setAddress
     }
 
     useEffect(() => {
@@ -117,8 +60,8 @@ function AddEmployee(props) {
     const handleNextButtonClick = () => {
         if (currentStepCount == stepComponents.length-1){
             console.log("the end");
-            setAddressObj(createAddressObj());
-            setEmployeeObj(createEmployeeObj());
+            sendForms();
+
         }else{
             setCurrentStepCount(currentStepCount + 1);
         }
@@ -153,7 +96,50 @@ function AddEmployee(props) {
         }
         return true;
     }
-    console.log(inputCheck())
+    const sendForms = () => {
+        let employeeObj = {
+            FirstName: firstName,
+            LastName: lastName,
+            Email: email,
+            IdCardNumber: idCardNum,
+            MothersName: mothersName,
+            BirthDate: birthDate,
+            ContactPhoneNumber: phoneNum
+        };
+
+        let addressObj = {
+            ZipCode: zipCode,
+            City: city,
+            StreetAddress: address,
+            IsBillingAddress: true,
+            IsHomeAddress: true,
+            CustomerId: 0
+        };
+
+        console.log(addressObj);
+        console.log(employeeObj);
+
+        axios.post('/api/addresses', addressObj)
+            .then(res => {
+                console.log(res)
+                if(res.status == 200){
+                    let addressId = res.data
+                    axios.post("/api/employees", employeeObj)
+                        .then(res => {
+                            console.log(res);
+                            if (res.status == 200){
+                                enqueueSnackbar("Success", {
+                                    variant: 'success'
+                                });
+                            }else if (res.status == 400){
+                                enqueueSnackbar("Failed", {
+                                    variant: 'error'
+                                });
+                            }
+                     })
+                }
+            })
+    }
     
     const stepComponents = [<UserTempalte employee={true} onChangeMethods={employeeFormOnChanges}/>,
                              <AddressTemplate onChangeMethods={addressFormOnChanges}/>]
