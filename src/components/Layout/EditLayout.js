@@ -1,6 +1,8 @@
 import { Grid } from '@material-ui/core'
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core';
+import { HomeInternetForm } from '../home/internet/HomeInternetForm';
+import { FormContext } from '../../FormContext'
 
 const useStyles = makeStyles({
     container: {
@@ -9,12 +11,29 @@ const useStyles = makeStyles({
         boxSizing: "border-box"
     },
     selectMenu: {
-        backgroundColor: "#3f51b5"
+        backgroundColor: "#3f51b5",
+        borderRadius: 3
     }
 });
 
+const switchForm = (form) => {
+    switch (form) {
+        case "homeInternet":
+            return <HomeInternetForm />
+        default:
+            return <h1>Click to the home internet</h1>
+    }
+};
+
 export const EditLayout = (props) => {
     const classes = useStyles();
+    const [FormName] = useContext(FormContext);
+    const [Form, setForm] = useState();
+
+    useEffect(() => {
+        setForm(switchForm(FormName));
+    }, [FormName])
+
     return (
         <div>
             <Grid container className={classes.container}>
@@ -22,7 +41,7 @@ export const EditLayout = (props) => {
                     {props.navarea}
                 </Grid>
                 <Grid item xs={10}>
-                    {props.workarea}
+                    {Form}
                 </Grid>
             </Grid>
         </div>

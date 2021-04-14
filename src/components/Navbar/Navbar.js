@@ -19,7 +19,7 @@ export default function Navbar() {
         <AppBar>
             <Toolbar>
                 <Typography className={classes.title} component={Link} to='/'>VodakomBlue</Typography>
-                <Button className={classes.button} component={Link} to="/create">create</Button>
+                <Button className={classes.button} component={Link} to="/packages">packages</Button>
             </Toolbar>
         </AppBar>
     )
