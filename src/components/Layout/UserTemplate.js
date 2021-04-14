@@ -24,7 +24,32 @@ function UserTemplate(props) {
     const[currentPosition, setPosition] = useState();
     const handleCurrentPositionChange = (event) => {
         setPosition(event.target.value);
-        props.onChangeMethods.position(event);
+        handlePositionChange(event)
+    }
+
+    const handleFirstNameChange = (event) => {
+        props.onChangeMethods.firstName(event.target.value);
+    }
+    const handleLastNameChange = (event) => {
+        props.onChangeMethods.lastName(event.target.value);
+    }
+    const handleMothersNameChange = (event) => {
+        props.onChangeMethods.mothersName(event.target.value);
+    }
+    const handleEmailChange = (event) => {
+        props.onChangeMethods.email(event.target.value);
+    }
+    const handlePhoneNumChange = (event) => {
+        props.onChangeMethods.phone(event.target.value);
+    }
+    const handleBirthDateChange = (event) => {
+        props.onChangeMethods.birthday(event.target.value);
+    }
+    const handleIdCardNumChange = (event) => {
+        props.onChangeMethods.idCard(event.target.value);
+    }
+    const handlePositionChange = (event) => {
+        props.onChangeMethods.position(event.target.value);
     }
     
     const classes = useStyles();
@@ -33,15 +58,15 @@ function UserTemplate(props) {
             <Grid container   alignItems="center">
                 <Grid item xs={6} className={classes.gridItems}>
                     <TextField  required id="firstname" label="First Name" variant="outlined" className={classes.textFields} 
-                    onChange={props.onChangeMethods.firstName}/>
+                    onChange={handleFirstNameChange}/>
                 </Grid>
                 <Grid item xs={6} className={classes.gridItems}>
                     <TextField required id="lastname" label="Last Name" variant="outlined" className={classes.textFields}
-                    onChange={props.onChangeMethods.lastName} />
+                    onChange={handleLastNameChange} />
                 </Grid>
                 <Grid item xs={6} className={classes.gridItems}>
                     <TextField required id="mothers-name" label="Mothers Name" variant="outlined" className={classes.textFields}
-                     onChange={props.onChangeMethods.mothersName} />
+                     onChange={handleMothersNameChange} />
                 </Grid>
                 <Grid item xs={6} className={classes.gridItems}>
                     <TextField required id="birthdate"
@@ -52,16 +77,16 @@ function UserTemplate(props) {
                         InputLabelProps={{
                         shrink: true,
                     }} variant="outlined"
-                        onChange={props.onChangeMethods.birthday}
+                        onChange={handleBirthDateChange}
                     />
                 </Grid>
                 <Grid item xs={6} className={classes.gridItems}>
                     <TextField required id="email" label="Email address" variant="outlined" className={classes.textFields} 
-                    onChange={props.onChangeMethods.email}/> 
+                    onChange={handleEmailChange}/> 
                 </Grid>
                 <Grid item xs={6} className={classes.gridItems}>
                     <TextField required id="id-card"  label="ID Card Number" variant="outlined" className={classes.textFields} 
-                    onChange={props.onChangeMethods.idCard}/>
+                    onChange={handleIdCardNumChange}/>
                 </Grid>
                 <Grid item xs={6} className={classes.gridItems}>
                     <TextField required id="phone-number"  label="Phone number" variant="outlined" className={classes.textFields} 
