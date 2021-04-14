@@ -16,7 +16,7 @@ import { useSnackbar } from 'notistack';
 function AddEmployee(props) {
     
     
-    const  enqueueSnackbar  = useSnackbar();
+    const{ enqueueSnackbar }  = useSnackbar();
     const[currentStepComponent, setCurrentStepComponent] = useState();
     const[currentStepCount, setCurrentStepCount] = useState(0);
     //Employee form states
@@ -33,7 +33,11 @@ function AddEmployee(props) {
     const[city, setCity] = useState();
     const[zipCode, setZipCode] = useState();
 
-    
+    const positionValue = {
+        Sales: 1,
+        HR:2,
+        Manager:3
+    };
     //Form onChange handlers
 
     const employeeFormOnChanges = {
@@ -97,15 +101,6 @@ function AddEmployee(props) {
         return true;
     }
     const sendForms = () => {
-        let employeeObj = {
-            FirstName: firstName,
-            LastName: lastName,
-            Email: email,
-            IdCardNumber: idCardNum,
-            MothersName: mothersName,
-            BirthDate: birthDate,
-            ContactPhoneNumber: phoneNum
-        };
 
         let addressObj = {
             ZipCode: zipCode,
@@ -113,20 +108,36 @@ function AddEmployee(props) {
             StreetAddress: address,
             IsBillingAddress: true,
             IsHomeAddress: true,
-            CustomerId: 0
+            CustomerId: null
         };
 
         console.log(addressObj);
-        console.log(employeeObj);
 
+       
         axios.post('/api/addresses', addressObj)
             .then(res => {
-                console.log(res)
                 if(res.status == 200){
                     let addressId = res.data
+
+                    let employeeObj = {
+                        FirstName: firstName,
+                        LastName: lastName,
+                        Email: email,
+                        IdCardNumber: idCardNum,
+                        MothersName: mothersName,
+                        BirthDate: birthDate,
+                        ContactPhoneNumber: phoneNum,
+                        AddressId: addressId,
+                        EmployeeType: positionValue[position]
+                    }
+
+                    console.log(employeeObj)
+
                     axios.post("/api/employees", employeeObj)
                         .then(res => {
+
                             console.log(res);
+
                             if (res.status == 200){
                                 enqueueSnackbar("Success", {
                                     variant: 'success'
