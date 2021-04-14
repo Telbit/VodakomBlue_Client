@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -30,8 +30,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function VerticalLinearStepper(props) {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
+  const[errorValue, setErrorValue] = useState(true);
+  const[disabledValue, setDisabledValue] = useState(false);
+  const[isAddressFormValid, setIsValid] = useState(false);
+
+  useEffect(() => {
+    setIsValid(props.validationMethod());
+    setErrorValue(!props.validationMethod());
+  }, [props.validationMethod()])
+
+  useEffect(() => {
+    setDisabledValue(errorValue);
+  }, [isAddressFormValid])
+
   const steps = props.getSteps();
+
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -50,11 +64,11 @@ export default function VerticalLinearStepper(props) {
 
   return (
     <div className={classes.root}>
-      <Stepper activeStep={activeStep} orientation="vertical">
+      <Stepper  activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-            <StepContent>
+          <Step key={label} >
+            <StepLabel error={errorValue}>{label}</StepLabel>
+            <StepContent >
               <Typography>{props.getStepContent(index)}</Typography>
               <div className={classes.actionsContainer}>
                 <div>
@@ -72,6 +86,7 @@ export default function VerticalLinearStepper(props) {
                     onClick={handleNext}
                     className={classes.button}
                     id="next-button"
+                    disabled={disabledValue}
                   >
                     {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                   </Button>
@@ -84,9 +99,9 @@ export default function VerticalLinearStepper(props) {
       {activeStep === steps.length && (
         <Paper square elevation={0} className={classes.resetContainer}>
           <Typography>All steps completed - you&apos;re finished</Typography>
-          <Button onClick={handleReset} className={classes.button}>
+          {/* <Button onClick={handleReset} className={classes.button}>
             Reset
-          </Button>
+          </Button> */}
         </Paper>
       )}
     </div>

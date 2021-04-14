@@ -32,7 +32,7 @@ function UserTemplate(props) {
         <div className={classes.root}>
             <Grid container   alignItems="center">
                 <Grid item xs={6} className={classes.gridItems}>
-                    <TextField required id="firstname" label="First Name" variant="outlined" className={classes.textFields} 
+                    <TextField  required id="firstname" label="First Name" variant="outlined" className={classes.textFields} 
                     onChange={props.onChangeMethods.firstName}/>
                 </Grid>
                 <Grid item xs={6} className={classes.gridItems}>

@@ -29,6 +29,9 @@ function AddEmployee(props) {
     const[address, setAddress] = useState();
     const[city, setCity] = useState();
     const[zipCode, setZipCode] = useState();
+
+    const[employeeObj, setEmployeeObj] = useState({});
+    const[addressObj, setAddressObj] = useState({});
     
     //Form onChange handlers
     //Employee form onChange handler methods
@@ -108,22 +111,23 @@ function AddEmployee(props) {
     }
 
     useEffect(() => {
-        setCurrentStepComponent(stepComponents[currentStepCount])
+        setCurrentStepComponent(stepComponents[currentStepCount]);
     }, [currentStepCount])
     
     const handleNextButtonClick = () => {
         if (currentStepCount == stepComponents.length-1){
-            console.log("the end")
-            console.log(address, zipCode, phoneNum,city,email)
+            console.log("the end");
+            setAddressObj(createAddressObj());
+            setEmployeeObj(createEmployeeObj());
         }else{
             setCurrentStepCount(currentStepCount + 1);
         }
         
     }
-    
     const handleBackButtonClick = () => {
         setCurrentStepCount(currentStepCount - 1);
     }
+
     
     /* useEffect(() => {
         const nextButton = document.getElementById('next-button');
@@ -137,23 +141,35 @@ function AddEmployee(props) {
         }
     }, []) */
     
-    
-    
+    const inputSteps = {
+        0:[firstName, lastName, mothersName, email, phoneNum, idCardNum, birthDate, position],
+        1:[zipCode,city,address]
+    }
+    const inputCheck = () => {
+        const inputs = inputSteps[currentStepCount];
+        let isValid = inputs.map(inp => inp === undefined ? false : true);
+        if (isValid.includes(false)){
+            return false;
+        }
+        return true;
+    }
+    console.log(inputCheck())
     
     const stepComponents = [<UserTempalte employee={true} onChangeMethods={employeeFormOnChanges}/>,
                              <AddressTemplate onChangeMethods={addressFormOnChanges}/>]
+    const classes = useStyles();
     
     return (
         <div >
         <form >
-        <Grid container   alignItems="center">
+        <Grid container   alignItems="center" className={classes.container}>
             <Grid item xs={6}>
                {currentStepComponent}
             </Grid>
             
             <Grid item xs={6}>
                 <Stepper getSteps={addEmployeeSteps} getStepContent={getAddEmployeeStepContent} 
-                backButton={handleBackButtonClick} nextButton={handleNextButtonClick}/>
+                backButton={handleBackButtonClick} nextButton={handleNextButtonClick} validationMethod={inputCheck} re/>
             </Grid>
         </Grid>
         </form>
@@ -171,10 +187,16 @@ const addEmployeeSteps = () => {
   const getAddEmployeeStepContent = (step) => {
     switch (step) {
       case 0:
-        return `Please fill all the required field according to the new Employee`;
+        return `Please fill all the required fields to proceed to the next step.`;
       case 1:
-        return 'If the employee billing address and home address is the same, check only the home address button.';
+        return 'Please fill all the required fields to finish the process.';
       default:
         return 'Unknown step';
     }
   }
+
+const useStyles = makeStyles({
+    container: {
+        minHeight: '60vh'
+    }
+})

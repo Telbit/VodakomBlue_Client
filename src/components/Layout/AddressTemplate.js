@@ -12,7 +12,6 @@ function AddressTemplate(props) {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            
                 <Grid container alignItems="center">
                     <Grid item xs={6} className={classes.gridItems}>
                         <TextField required type="number" id="zip-code" label="Zip code" variant="outlined" className={classes.textFields} 
@@ -30,7 +29,6 @@ function AddressTemplate(props) {
                         <TextField required  id="state" label="State" variant="outlined" className={classes.textFields} />
                     </Grid> 
                 </Grid>
-            
         </div>
     )
 }
