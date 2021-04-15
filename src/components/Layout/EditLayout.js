@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core';
 import { HomeInternetForm } from '../home/internet/HomeInternetForm';
 import { FormContext } from '../../FormContext'
+import { HomeTvForm } from '../home/Tv/HomeTvForm';
 
 const useStyles = makeStyles({
     container: {
@@ -20,6 +21,8 @@ const switchForm = (form) => {
     switch (form) {
         case "homeInternet":
             return <HomeInternetForm />
+        case "homeTv":
+            return <HomeTvForm />
         default:
             return <h1>Click to the home internet</h1>
     }
