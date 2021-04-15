@@ -10,15 +10,15 @@ function UserTemplate(props) {
     const positions = [
         {
             label:"Sales",
-            value:"Sales"
+            value:1
         },
         {
             label:"HR",
-            value:"HR"
+            value:2
         },
         {
             label:"Manager",
-            value:"Manager"
+            value:3
         }
     ];
     const[currentPosition, setPosition] = useState();
@@ -49,7 +49,7 @@ function UserTemplate(props) {
         props.onChangeMethods.idCard(event.target.value);
     }
     const handlePositionChange = (event) => {
-        props.onChangeMethods.position(event.target.value);
+        props.onChangeMethods.position(parseInt(event.target.value));
     }
     
     const classes = useStyles();
