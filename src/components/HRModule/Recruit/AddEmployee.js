@@ -33,11 +33,6 @@ function AddEmployee(props) {
     const[city, setCity] = useState();
     const[zipCode, setZipCode] = useState();
 
-    const positionValue = {
-        Sales: 1,
-        HR:2,
-        Manager:3
-    };
     //Form onChange handlers
 
     const employeeFormOnChanges = {
@@ -64,7 +59,7 @@ function AddEmployee(props) {
     const handleNextButtonClick = () => {
         if (currentStepCount == stepComponents.length-1){
             console.log("the end");
-            sendForms();
+            sendAddressFormAsync(sendEmployeeFormAsync);
 
         }else{
             setCurrentStepCount(currentStepCount + 1);
@@ -92,6 +87,7 @@ function AddEmployee(props) {
         0:[firstName, lastName, mothersName, email, phoneNum, idCardNum, birthDate, position],
         1:[zipCode,city,address]
     }
+
     const inputCheck = () => {
         const inputs = inputSteps[currentStepCount];
         let isValid = inputs.map(inp => inp === undefined ? false : true);
@@ -100,7 +96,7 @@ function AddEmployee(props) {
         }
         return true;
     }
-    const sendForms = () => {
+    const sendAddressFormAsync = async (sendEmployeeForm) => {
 
         let addressObj = {
             ZipCode: zipCode,
@@ -111,44 +107,35 @@ function AddEmployee(props) {
             CustomerId: null
         };
 
-        console.log(addressObj);
-
-       
-        axios.post('/api/addresses', addressObj)
+        await axios.post('/api/addresses', addressObj)
             .then(res => {
-                if(res.status == 200){
-                    let addressId = res.data
+                sendEmployeeForm(res.data); 
+            })
+    }
 
-                    let employeeObj = {
-                        FirstName: firstName,
-                        LastName: lastName,
-                        Email: email,
-                        IdCardNumber: idCardNum,
-                        MothersName: mothersName,
-                        BirthDate: birthDate,
-                        ContactPhoneNumber: phoneNum,
-                        AddressId: addressId,
-                        EmployeeType: positionValue[position]
-                    }
-
-                    console.log(employeeObj)
-
-                    axios.post("/api/employees", employeeObj)
-                        .then(res => {
-
-                            console.log(res);
-
-                            if (res.status == 200){
-                                enqueueSnackbar("Success", {
-                                    variant: 'success'
-                                });
-                            }else if (res.status == 400){
-                                enqueueSnackbar("Failed", {
-                                    variant: 'error'
-                                });
-                            }
-                     })
-                }
+    const sendEmployeeFormAsync = async (addressData) => {
+        let employeeObj = {
+            "FirstName": firstName,
+            "LastName": lastName,
+            "Email": email,
+            "IdCardNumber": idCardNum,
+            "MothersName": mothersName,
+            "BirthDate": "2015-01-02",
+            "ContactPhoneNumber": phoneNum,
+            "AddressId": addressData,
+            "EmployeeType": position
+        }
+        await axios.post('https://localhost:44315/api/employees', employeeObj)
+            .then(res => {
+                console.log("employeeRes",res);
+                    enqueueSnackbar("Success", {
+                        variant: 'success'
+                    });
+            })
+            .catch((error) => {
+                enqueueSnackbar("Failed", {
+                    variant: 'error'
+                });
             })
     }
     
