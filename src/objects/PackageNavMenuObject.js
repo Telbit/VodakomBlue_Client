@@ -33,5 +33,6 @@ export const navMenu = {
                 padding: 1
             },
         }
-    }
+    },
+    
 };

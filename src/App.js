@@ -20,7 +20,9 @@ export const App = () => {
                     </FormProvider>
                 </Route>
                 <Route path="/hr">
-                    <EditLayout navarea={<PackageNavMenu/>} />
+                    <FormProvider>
+                        <EditLayout navarea={<PackageNavMenu/>} />
+                    </FormProvider>
                 </Route>
             </Switch>
         </div>
