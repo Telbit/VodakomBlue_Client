@@ -31,8 +31,6 @@ function ListEmployees() {
                    <TableHead className={classes.head}>
                        <TableRow>
                            <TableCell>Employees</TableCell>
-                           <TableCell alighn="right">First Name</TableCell>
-                           <TableCell alighn="right">Last Name</TableCell>
                            <TableCell alighn="right">Position</TableCell>
                            <TableCell alighn="right">Email Address</TableCell>
                            <TableCell alighn="right">ID Card Number</TableCell>
@@ -45,8 +43,6 @@ function ListEmployees() {
 
                             <TableRow key={employee.id}>
                                 <TableCell component="th" scope="row"> {employee.firstName + " " + employee.lastName}</TableCell>
-                                <TableCell align="center">{employee.firstName}</TableCell>
-                                <TableCell align="center">{employee.lastName}</TableCell>
                                 <TableCell align="center">{positions[employee.employeeType -1]}</TableCell>
                                 <TableCell align="center">{employee.email}</TableCell>
                                 <TableCell align="center">{employee.idCardNumber}</TableCell>
@@ -66,7 +62,7 @@ export default ListEmployees
 const useStyles = makeStyles({
     container: {
         paddingTop: '15%',
-        maxWidth: '65vw'
+        maxWidth: '70vw'
     },
     table: {
         minWidth: 650,
