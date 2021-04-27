@@ -6,6 +6,7 @@ import { EditLayout } from './components/Layout/EditLayout';
 import { PackageNavMenu, HRNavMenu } from './components/NavMenu/PackageNavMenu';
 import { FormProvider } from './FormContext';
 import ListEmployees from './components/HRModule/Employees/ListEmployees';
+import EmployeeDetails from './components/HRModule/Employees/EmployeeDetails';
 
 export const App = () => {
     return (
@@ -25,8 +26,8 @@ export const App = () => {
                         <EditLayout navarea={<PackageNavMenu/>} />
                     </FormProvider>
                 </Route>
-                <Route path="/hr/employees">
-                    <ListEmployees/>
+                <Route path="/employee">
+                    <EmployeeDetails/>
                 </Route>
             </Switch>
         </div>
