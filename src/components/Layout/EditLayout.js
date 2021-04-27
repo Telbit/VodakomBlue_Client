@@ -5,6 +5,7 @@ import { HomeInternetForm } from '../home/internet/HomeInternetForm';
 import { FormContext } from '../../FormContext'
 import { HomeTvForm } from '../home/Tv/HomeTvForm';
 import { HomePhoneForm } from '../home/phone/HomePhoneForm';
+import AddEmployee from '../HRModule/Recruit/AddEmployee';
 
 const useStyles = makeStyles({
     container: {
@@ -26,6 +27,8 @@ const switchForm = (form) => {
             return <HomeTvForm />
         case "homePhone":
             return <HomePhoneForm />
+        case "recruitEmployee":
+            return <AddEmployee />
         default:
             return <h1>Click to the home internet</h1>
     }
