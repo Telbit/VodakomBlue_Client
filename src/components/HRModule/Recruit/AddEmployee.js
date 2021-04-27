@@ -127,7 +127,6 @@ function AddEmployee(props) {
         }
         await axios.post('https://localhost:44315/api/employees', employeeObj)
             .then(res => {
-                console.log("employeeRes",res);
                     enqueueSnackbar("Success", {
                         variant: 'success'
                     });

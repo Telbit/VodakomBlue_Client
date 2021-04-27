@@ -3,7 +3,8 @@ import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import React, { useContext, useState } from 'react'
 import { FormContext } from '../../FormContext';
 import { makeStyles } from '@material-ui/core';
-import { navMenu } from '../../objects/PackageNavMenuObject';
+import { navMenu,  } from '../../objects/PackageNavMenuObject';
+import { hrNavMenu } from '../../objects/HrNavMenuObj';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -61,7 +62,7 @@ export const PackageNavMenu = () => {
     const classes = useStyles();
     return (
         <List className={classes.root} >
-            {PrintNavButtons(navMenu)}
+            {PrintNavButtons(hrNavMenu)}
         </List>
     )
 }
