@@ -2,7 +2,9 @@ import { Grid } from '@material-ui/core'
 import React, { useContext, useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core';
 import { HomeInternetForm } from '../home/internet/HomeInternetForm';
-import { FormContext } from '../../FormContext';
+import { FormContext } from '../../FormContext'
+import { HomeTvForm } from '../home/Tv/HomeTvForm';
+import { HomePhoneForm } from '../home/phone/HomePhoneForm';
 import AddEmployee from '../HRModule/Recruit/AddEmployee';
 
 const useStyles = makeStyles({
@@ -21,6 +23,10 @@ const switchForm = (form) => {
     switch (form) {
         case "homeInternet":
             return <HomeInternetForm />
+        case "homeTv":
+            return <HomeTvForm />
+        case "homePhone":
+            return <HomePhoneForm />
         case "recruitEmployee":
             return <AddEmployee />
         default:
