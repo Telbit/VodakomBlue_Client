@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core';
 import { HomeInternetForm } from '../home/internet/HomeInternetForm';
 import { FormContext } from '../../FormContext'
 import MobileInternetForm from '../Mobile/Internet/MobileInternetForm';
+import MobilePhoneForm from '../Mobile/Phone/MobilePhoneForm';
 
 const useStyles = makeStyles({
     container: {
@@ -23,6 +24,8 @@ const switchForm = (form) => {
             return <HomeInternetForm />
         case "mobileInternet":
             return <MobileInternetForm/>
+        case "mobilePhone":
+            return <MobilePhoneForm/>
         default:
             return <h1>Click to the home internet</h1>
     }

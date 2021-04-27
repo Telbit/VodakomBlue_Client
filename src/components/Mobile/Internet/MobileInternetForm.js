@@ -17,6 +17,16 @@ export default function MobileInternetForm(){
 
     const classes = useStyles();
 
+    let SubmitFormEvent = (event) => {
+        const internetPackage = {
+            Name,
+            Price,
+            ReleaseDate,
+            Size
+        }
+        console.log(internetPackage)
+    } 
+
     let NameEvent = (event) => {
         setName(event.target.value);
     }
@@ -35,7 +45,7 @@ export default function MobileInternetForm(){
 
     return(
         <div className={classes.main}>
-            <form>
+            <form onSubmit={SubmitFormEvent}>
                 <TextField
                     className={classes.input}
                     label="Name"
