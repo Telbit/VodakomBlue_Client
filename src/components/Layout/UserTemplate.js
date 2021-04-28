@@ -10,18 +10,19 @@ function UserTemplate(props) {
     const positions = [
         {
             label:"Sales",
-            value:"Sales"
+            value:1
         },
         {
             label:"HR",
-            value:"HR"
+            value:2
         },
         {
             label:"Manager",
-            value:"Manager"
+            value:3
         }
     ];
     const[currentPosition, setPosition] = useState();
+    const[isPhoneNumValid, setIsPhoneNumValid] = useState();
     const handleCurrentPositionChange = (event) => {
         setPosition(event.target.value);
         handlePositionChange(event)
@@ -41,6 +42,11 @@ function UserTemplate(props) {
     }
     const handlePhoneNumChange = (event) => {
         props.onChangeMethods.phone(event.target.value);
+        if (event.target.value.length == 11 || event.target.value.length == 12){
+            setIsPhoneNumValid(false);
+        }else{
+            setIsPhoneNumValid(true);
+        }
     }
     const handleBirthDateChange = (event) => {
         props.onChangeMethods.birthday(new Date(event.target.value));
@@ -49,7 +55,7 @@ function UserTemplate(props) {
         props.onChangeMethods.idCard(event.target.value);
     }
     const handlePositionChange = (event) => {
-        props.onChangeMethods.position(event.target.value);
+        props.onChangeMethods.position(parseInt(event.target.value));
     }
     
     const classes = useStyles();
@@ -89,8 +95,8 @@ function UserTemplate(props) {
                     onChange={handleIdCardNumChange}/>
                 </Grid>
                 <Grid item xs={6} className={classes.gridItems}>
-                    <TextField required id="phone-number"  label="Phone number" variant="outlined" className={classes.textFields} 
-                    onChange={handlePhoneNumChange}/>
+                    <TextField error={isPhoneNumValid} required id="phone-number"  label="Phone number" variant="outlined" className={classes.textFields} 
+                    onChange={handlePhoneNumChange} helperText="Starts with: +36 or 06"/>
                 </Grid>
                 <Grid item xs={6} className={classes.gridItems}>
                     {props.employee && <TextField
