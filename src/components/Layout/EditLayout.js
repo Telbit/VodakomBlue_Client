@@ -3,6 +3,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core';
 import { HomeInternetForm } from '../home/internet/HomeInternetForm';
 import { FormContext } from '../../FormContext'
+import MobileInternetForm from '../Mobile/Internet/MobileInternetForm';
+import MobilePhoneForm from '../Mobile/Phone/MobilePhoneForm';
 import { HomeTvForm } from '../home/Tv/HomeTvForm';
 import { HomePhoneForm } from '../home/phone/HomePhoneForm';
 import AddEmployee from '../HRModule/Recruit/AddEmployee';
@@ -23,6 +25,10 @@ const switchForm = (form) => {
     switch (form) {
         case "homeInternet":
             return <HomeInternetForm />
+        case "mobileInternet":
+            return <MobileInternetForm/>
+        case "mobilePhone":
+            return <MobilePhoneForm/>
         case "homeTv":
             return <HomeTvForm />
         case "homePhone":
