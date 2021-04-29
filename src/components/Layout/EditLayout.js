@@ -9,17 +9,17 @@ import { HomeTvForm } from '../home/Tv/HomeTvForm';
 import { HomePhoneForm } from '../home/phone/HomePhoneForm';
 import AddEmployee from '../HRModule/Recruit/AddEmployee';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     container: {
         paddingTop: "70px",
         minHeight: "100vh",
         boxSizing: "border-box"
     },
     selectMenu: {
-        backgroundColor: "#3f51b5",
-        borderRadius: 3
+        borderRadius: 3,
+        backgroundColor: theme.bgColor.main,
     }
-});
+}));
 
 const switchForm = (form) => {
     switch (form) {

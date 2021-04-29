@@ -3,7 +3,10 @@ import { AppBar, Button, Toolbar, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
+    root : {
+        backgroundColor: theme.bgColor.main
+    },
     title: {
         flexGrow: 1,
         textDecoration: "none",
@@ -12,11 +15,12 @@ const useStyles = makeStyles({
     button: {
         color: "inherit"
     }
-});
+}));
+
 export default function Navbar() {
     const classes = useStyles();
     return (
-        <AppBar>
+        <AppBar className={classes.root}>
             <Toolbar>
                 <Typography className={classes.title} component={Link} to='/'>VodakomBlue</Typography>
                 <Button className={classes.button} component={Link} to="/packages">packages</Button>

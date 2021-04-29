@@ -1,6 +1,6 @@
 import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
-import { Button, Grid, Typography } from '@material-ui/core';
+import { Button, Grid, Typography, makeStyles } from '@material-ui/core';
 import Navbar from './components/Navbar/Navbar';
 import { EditLayout } from './components/Layout/EditLayout';
 import { PackageNavMenu, HRNavMenu } from './components/NavMenu/PackageNavMenu';
@@ -9,7 +9,15 @@ import ListEmployees from './components/HRModule/Employees/ListEmployees';
 import { hrNavMenu } from './objects/HrNavMenuObj';
 import { packageNavMenu } from './objects/PackageNavMenuObject';
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+        backgroundColor: theme.bgColor.secondary
+    }
+}))
+
 export const App = () => {
+    const classes = useStyles();
+
     return (
         <div>
             <Navbar />
