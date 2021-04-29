@@ -24,6 +24,7 @@ export default function Navbar() {
             <Toolbar>
                 <Typography className={classes.title} component={Link} to='/'>VodakomBlue</Typography>
                 <Button className={classes.button} component={Link} to="/packages">packages</Button>
+                <Button className={classes.button} component={Link} to="/hr">HR</Button>
             </Toolbar>
         </AppBar>
     )

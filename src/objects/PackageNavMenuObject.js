@@ -1,4 +1,4 @@
-export const navMenu = {
+export const packageNavMenu = {
     home: {
         name: "Home",
         children: {
@@ -33,5 +33,6 @@ export const navMenu = {
                 padding: 1
             },
         }
-    }
+    },
+
 };
