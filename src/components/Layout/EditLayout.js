@@ -6,17 +6,17 @@ import { FormContext } from '../../FormContext'
 import MobileInternetForm from '../Mobile/Internet/MobileInternetForm';
 import MobilePhoneForm from '../Mobile/Phone/MobilePhoneForm';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     container: {
         paddingTop: "70px",
         minHeight: "100vh",
         boxSizing: "border-box"
     },
     selectMenu: {
-        backgroundColor: "#3f51b5",
-        borderRadius: 3
+        borderRadius: 3,
+        backgroundColor: theme.bgColor.main,
     }
-});
+}));
 
 const switchForm = (form) => {
     switch (form) {
