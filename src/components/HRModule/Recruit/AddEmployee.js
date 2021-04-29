@@ -70,19 +70,6 @@ function AddEmployee(props) {
         setCurrentStepCount(currentStepCount - 1);
     }
 
-
-    /* useEffect(() => {
-        const nextButton = document.getElementById('next-button');
-        const backButton = document.getElementById('back-button');
-        
-        backButton.addEventListener('click', handleBackButtonClick);
-        nextButton.addEventListener('click', handleNextButtonClick);
-        return () => {
-            backButton.removeEventListener('click', handleBackButtonClick);
-            nextButton.removeEventListener('click', handleNextButtonClick);
-        }
-    }, []) */
-
     const inputSteps = {
         0: [firstName, lastName, mothersName, email, phoneNum, idCardNum, birthDate, position],
         1: [zipCode, city, address]
