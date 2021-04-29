@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -14,24 +14,24 @@ import { useSnackbar } from 'notistack';
 
 
 function AddEmployee(props) {
-    
-    
-    const{ enqueueSnackbar }  = useSnackbar();
-    const[currentStepComponent, setCurrentStepComponent] = useState();
-    const[currentStepCount, setCurrentStepCount] = useState(0);
+
+
+    const { enqueueSnackbar } = useSnackbar();
+    const [currentStepComponent, setCurrentStepComponent] = useState();
+    const [currentStepCount, setCurrentStepCount] = useState(0);
     //Employee form states
-    const[firstName, setFirstName] = useState();
-    const[lastName, setLastName] = useState();
-    const[mothersName, setMothersName] = useState();
-    const[email, setEmail] = useState();
-    const[phoneNum, setPhoneNum] = useState();
-    const[birthDate, setBirthDate] = useState();
-    const[idCardNum, setIdCardNum] = useState();
-    const[position, setPositon] = useState();
+    const [firstName, setFirstName] = useState();
+    const [lastName, setLastName] = useState();
+    const [mothersName, setMothersName] = useState();
+    const [email, setEmail] = useState();
+    const [phoneNum, setPhoneNum] = useState();
+    const [birthDate, setBirthDate] = useState();
+    const [idCardNum, setIdCardNum] = useState();
+    const [position, setPositon] = useState();
     //Address form states
-    const[address, setAddress] = useState();
-    const[city, setCity] = useState();
-    const[zipCode, setZipCode] = useState();
+    const [address, setAddress] = useState();
+    const [city, setCity] = useState();
+    const [zipCode, setZipCode] = useState();
 
     //Form onChange handlers
 
@@ -55,22 +55,22 @@ function AddEmployee(props) {
     useEffect(() => {
         setCurrentStepComponent(stepComponents[currentStepCount]);
     }, [currentStepCount])
-    
+
     const handleNextButtonClick = () => {
-        if (currentStepCount == stepComponents.length-1){
+        if (currentStepCount == stepComponents.length - 1) {
             console.log("the end");
             sendAddressFormAsync(sendEmployeeFormAsync);
 
-        }else{
+        } else {
             setCurrentStepCount(currentStepCount + 1);
         }
-        
+
     }
     const handleBackButtonClick = () => {
         setCurrentStepCount(currentStepCount - 1);
     }
 
-    
+
     /* useEffect(() => {
         const nextButton = document.getElementById('next-button');
         const backButton = document.getElementById('back-button');
@@ -82,16 +82,16 @@ function AddEmployee(props) {
             nextButton.removeEventListener('click', handleNextButtonClick);
         }
     }, []) */
-    
+
     const inputSteps = {
-        0:[firstName, lastName, mothersName, email, phoneNum, idCardNum, birthDate, position],
-        1:[zipCode,city,address]
+        0: [firstName, lastName, mothersName, email, phoneNum, idCardNum, birthDate, position],
+        1: [zipCode, city, address]
     }
 
     const inputCheck = () => {
         const inputs = inputSteps[currentStepCount];
         let isValid = inputs.map(inp => inp === undefined ? false : true);
-        if (isValid.includes(false)){
+        if (isValid.includes(false)) {
             return false;
         }
         return true;
@@ -109,7 +109,7 @@ function AddEmployee(props) {
 
         await axios.post('/api/addresses', addressObj)
             .then(res => {
-                sendEmployeeForm(res.data); 
+                sendEmployeeForm(res.data);
             })
     }
 
@@ -125,11 +125,11 @@ function AddEmployee(props) {
             "AddressId": addressData,
             "EmployeeType": position
         }
-        await axios.post('https://localhost:44315/api/employees', employeeObj)
+        await axios.post('/api/employees', employeeObj)
             .then(res => {
-                    enqueueSnackbar("Success", {
-                        variant: 'success'
-                    });
+                enqueueSnackbar("Success", {
+                    variant: 'success'
+                });
             })
             .catch((error) => {
                 enqueueSnackbar("Failed", {
@@ -137,26 +137,26 @@ function AddEmployee(props) {
                 });
             })
     }
-    
-    const stepComponents = [<UserTempalte employee={true} onChangeMethods={employeeFormOnChanges}/>,
-                             <AddressTemplate onChangeMethods={addressFormOnChanges}/>]
+
+    const stepComponents = [<UserTempalte employee={true} onChangeMethods={employeeFormOnChanges} />,
+    <AddressTemplate onChangeMethods={addressFormOnChanges} />]
     const classes = useStyles();
-    
+
     return (
         <div >
-        <form >
-        <Grid container   alignItems="center" className={classes.container}>
-            <Grid item xs={6}>
-               {currentStepComponent}
-            </Grid>
-            
-            <Grid item xs={6}>
-                <Stepper getSteps={addEmployeeSteps} getStepContent={getAddEmployeeStepContent} 
-                backButton={handleBackButtonClick} nextButton={handleNextButtonClick} validationMethod={inputCheck} re/>
-            </Grid>
-        </Grid>
-        </form>
-        </div>  
+            <form >
+                <Grid container alignItems="center" className={classes.container}>
+                    <Grid item xs={6}>
+                        {currentStepComponent}
+                    </Grid>
+
+                    <Grid item xs={6}>
+                        <Stepper getSteps={addEmployeeSteps} getStepContent={getAddEmployeeStepContent}
+                            backButton={handleBackButtonClick} nextButton={handleNextButtonClick} validationMethod={inputCheck} re />
+                    </Grid>
+                </Grid>
+            </form>
+        </div>
     )
 }
 
@@ -165,18 +165,18 @@ export default AddEmployee
 
 const addEmployeeSteps = () => {
     return ['Personal information', 'Address'];
-  }
-  
-  const getAddEmployeeStepContent = (step) => {
+}
+
+const getAddEmployeeStepContent = (step) => {
     switch (step) {
-      case 0:
-        return `Please fill all the required fields to proceed to the next step.`;
-      case 1:
-        return 'Please fill all the required fields to finish the process.';
-      default:
-        return 'Unknown step';
+        case 0:
+            return `Please fill all the required fields to proceed to the next step.`;
+        case 1:
+            return 'Please fill all the required fields to finish the process.';
+        default:
+            return 'Unknown step';
     }
-  }
+}
 
 const useStyles = makeStyles({
     container: {
